@@ -23,7 +23,7 @@ export async function create(req: express.Request) {
         }
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "create",
             return: err
         };

@@ -39,7 +39,7 @@ export async function read(req: express.Request) {
         };
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "read",
             return: err
         };
@@ -71,7 +71,7 @@ export async function readNewest() {
         }
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "newest",
             return: err
         };

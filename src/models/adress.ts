@@ -1,7 +1,6 @@
 import { conectDb } from '../db/db';
 
 export class Adress {
-    logradouro: string;
     nome_adress: string;
     numero: number;
     complemento?: string;
@@ -11,7 +10,6 @@ export class Adress {
     estado: string;
 
     constructor(adress: any) {
-        this.logradouro = adress.logradouro;
         this.nome_adress = adress.nome_adress;
         this.numero = adress.numero;
         this.complemento = adress.complemento;
@@ -25,8 +23,8 @@ export class Adress {
         try {
             if (newAdress.complemento == undefined) newAdress.complemento = "";
 
-            let adress = await (await conectDb()).query("SELECT id_adress FROM adress AS a WHERE a.logradouro = ? AND a.nome_adress = ? AND a.numero = ? AND a.complemento = ? AND a.cep = ? AND a.bairro = ? AND a.cidade = ? AND a.estado = ?",
-                [newAdress.logradouro, newAdress.nome_adress, newAdress.numero, newAdress.complemento, newAdress.cep, newAdress.bairro, newAdress.cidade, newAdress.estado])
+            let adress = await (await conectDb()).query("SELECT id_adress FROM adress AS a WHERE a.nome_adress = ? AND a.numero = ? AND a.complemento = ? AND a.cep = ? AND a.bairro = ? AND a.cidade = ? AND a.estado = ?",
+                [newAdress.nome_adress, newAdress.numero, newAdress.complemento, newAdress.cep, newAdress.bairro, newAdress.cidade, newAdress.estado])
 
             if (adress.length != 0) return ({ isValid: true, msg: adress[0].id_adress });
             else {
@@ -61,7 +59,7 @@ export class Adress {
             if (adress.affectedRows != 0) return ({ isValid: true, msg: adressId[0].id_adress });
             else return ({ isValid: false, msg: "Enderço não encontrada" });
         } catch (err) {
-            return ({ isValid: false, msg: err });
+            throw err;
         };
     };
 };

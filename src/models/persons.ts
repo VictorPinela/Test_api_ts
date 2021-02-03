@@ -11,7 +11,7 @@ export class Person {
     data_nasc: Date;
     sexo: sexo;
     signo?: signo;
-    mãe: string;
+    mae: string;
     pai?: string;
     email: string;
     senha: string;
@@ -32,7 +32,7 @@ export class Person {
         this.data_nasc = person.data_nasc;
         this.sexo = person.sexo;
         this.signo = person.signo;
-        this.mãe = person.mãe;
+        this.mae = person.mae;
         this.pai = person.pai;
         this.email = person.email;
         this.senha = person.senha;
@@ -51,7 +51,7 @@ export class Person {
             const person = await (await conectDb()).query("INSERT INTO persons SET ?", newPerson);
             return ({ isValid: true, msg: person.insertId });
         } catch (err) {
-            return ({ isValid: false, msg: err });
+            throw err;
         };
     };
 

@@ -1,7 +1,7 @@
 import { Response } from 'express';
 
 export function responseHandler(data: any, res: Response) {
-    if (data.status == 400) erroHandler(data, res);
+    if (data.status == 500) erroHandler(data, res);
     else return res.status(data.status).send({ message: data.msg, retorno: data.return });
 };
 

@@ -58,7 +58,7 @@ export async function update(req: express.Request) {
         }
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "update",
             return: err
         };

@@ -27,7 +27,7 @@ export async function login(req: express.Request) {
         }
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "login",
             return: err
         };

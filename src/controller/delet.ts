@@ -24,7 +24,7 @@ export async function delet(req: express.Request) {
         };
     } catch (err) {
         return {
-            status: 400,
+            status: 500,
             msg: "delet",
             return: err
         };
