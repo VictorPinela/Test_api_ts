@@ -1,0 +1,47 @@
+{
+  "name": "test_api_ts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "jest.confi.js",
+  "scripts": {
+    "test": "jest -no--cache",
+    "start": "tsnd index.ts",
+    "build": "tsc",
+    "jest-coverage": "yarn run jest -- --coverage"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VictorPinela/Test_api_ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VictorPinela/Test_api_ts/issues"
+  },
+  "homepage": "https://github.com/VictorPinela/Test_api_ts#readme",
+  "dependencies": {
+    "@types/bluebird": "^3.5.33",
+    "@types/jsonwebtoken": "^8.5.0",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql": "github:mysqljs/mysql",
+    "promise-mysql": "^5.0.2",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.11",
+    "@types/jest": "^25.1.2",
+    "@types/mysql": "^2.15.17",
+    "@types/supertest": "^2.0.10",
+    "@types/uuid": "^8.3.0",
+    "jest": "^25.1.0",
+    "jest-cli": "^26.6.3",
+    "supertest": "^6.1.3",
+    "ts-jest": "^25.2.0",
+    "ts-node-dev": "^1.1.1",
+    "typescript": "^3.7.5"
+  }
+}
