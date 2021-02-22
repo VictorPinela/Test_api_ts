@@ -1,33 +1,26 @@
 import express from 'express';
 
-import { closeDb } from '../db/db';
-import { Adress } from '../models/adress';
-import { Person } from '../models/persons';
+import { Address } from '../sqz/models/Address';
+import { Person } from '../sqz/models/Person';
 
 export async function create(req: express.Request) {
     try {
-        if (Object.keys(req.body).length == 0) throw "Body não pode ser vazio!";
-
-        const createAdress = await Adress.create(new Adress(req.body));
-        if (!createAdress.isValid) throw createAdress.msg;
-        else {
-            req.body.id_adress = createAdress.msg;
-
-            const createPerson = await Person.create(new Person(req.body));
-            if (!createPerson.isValid) throw createPerson.msg;
-            else return {
-                status: 200,
-                msg: "Pessoa cadastrada",
-                return: createPerson.msg
-            };
-        }
-    } catch (err) {
-        return {
-            status: 500,
-            msg: "create",
-            return: err
+        let address;
+        address = await Address.findOne({
+            where: {
+                cep: req.body.cep,
+                numero: req.body.numero,
+                complemento: req.body.complemento
+            },
+            raw: true
+        });
+        if (address == null) {
+            address = await Address.create(req.body);
         };
-    } finally {
-        closeDb();
+        req.body.address = address.id;
+        const person = await Person.create(req.body);
+        return { status: 200, msg: { id: person.id } };
+    } catch (err) {
+        return { status: 500, mdg: err };
     };
 };

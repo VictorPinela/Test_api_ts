@@ -2,7 +2,7 @@
   "name": "test_api_ts",
   "version": "1.0.0",
   "description": "",
-  "main": "jest.confi.js",
+  "main": "index.ts",
   "scripts": {
     "test": "jest -no--cache",
     "start": "tsnd index.ts",
@@ -10,16 +10,12 @@
     "jest-coverage": "yarn run jest -- --coverage"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/VictorPinela/Test_api_ts.git"
   },
   "keywords": [],
   "author": "Victor",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/VictorPinela/Test_api_ts/issues"
   },
-  "homepage": "https://github.com/VictorPinela/Test_api_ts#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",

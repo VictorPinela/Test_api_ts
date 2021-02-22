@@ -1,6 +1,9 @@
 import { Table, Column, Model, PrimaryKey, AllowNull, AutoIncrement, CreatedAt, UpdatedAt, Is, DataType, ForeignKey, BelongsTo, Unique } from 'sequelize-typescript';
-import { sexo, signo, tipo_sanguineo } from '../config/enum';
 import { Address } from './Address';
+
+enum sexo { 'feminino', 'masculino' };
+enum signo { "Áries", "Leão", "Sagitário", "Capricórnio", "Touro", "Virgem", "Libra", "Aquário", "Gêmeos", "Câncer", "Escorpião", "Peixes" };
+enum tipo_sanguineo { "AB+", "AB-", "A+", "A-", "B+", "B-", "O+", "O-" };
 
 @Table({ tableName: "person" })
 export class Person extends Model {
@@ -12,7 +15,8 @@ export class Person extends Model {
 
     @AllowNull(false)
     @ForeignKey(() => Address)
-    address!: Address;
+    @Column
+    address!: number;
 
     @BelongsTo(() => Address)
     fk_address!: Address;
@@ -27,12 +31,12 @@ export class Person extends Model {
 
     @AllowNull(false)
     @Unique
-    @Column(DataType.STRING(11))
+    @Column(DataType.STRING(14))
     cpf!: string;
 
     @AllowNull(false)
     @Unique
-    @Column(DataType.STRING(9))
+    @Column(DataType.STRING(12))
     rg!: string;
 
     @AllowNull(false)
@@ -65,20 +69,12 @@ export class Person extends Model {
     senha!: string;
 
     @AllowNull(true)
-    @Column(DataType.STRING(2))
-    ddd_fixo!: string;
-
-    @AllowNull(true)
-    @Column(DataType.STRING(8))
-    tel_fixo!: string;
+    @Column(DataType.STRING(14))
+    telefone_fixo!: string;
 
     @AllowNull(false)
-    @Column(DataType.STRING(2))
-    ddd_cel!: string;
-
-    @AllowNull(false)
-    @Column(DataType.STRING(9))
-    cel!: string;
+    @Column(DataType.STRING(15))
+    celular!: string;
 
     @AllowNull(false)
     @Column(DataType.STRING(4))

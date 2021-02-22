@@ -1,34 +1,27 @@
 import express from 'express';
-import jwt from 'jsonwebtoken';
 
-import { closeDb } from '../db/db';
-import { Person } from '../models/persons';
+import { Address } from '../sqz/models/Address';
+import { Person } from '../sqz/models/Person';
 
 export async function delet(req: express.Request) {
     try {
-        if (!req.headers.token) throw "Deve ser enviado um token atraves do header";
-        else {
-            let id;
-            try {
-                const token = jwt.verify(req.headers.token.toString(), 'winn');
-                id = Object.values(token)[0];
-            } catch (err) { throw err }
+        const person = await Person.findOne({
+            where: {
+                id: req.body.id_person
+            },
+            include: Address,
+            raw: true,
+            nest: true
+        });
+        if (person == null) throw "Cadastro não encontrado";
 
-            const deletePerson = await Person.delet(id);
-            if (!deletePerson.isValid) throw deletePerson.msg;
-            else return {
-                status: 200,
-                msg: "Cadastro deletado com sucesso",
-                return: { id_deletado: deletePerson.msg }
-            };
-        };
+        await Person.destroy({
+            where: {
+                id: req.body.id_person
+            }
+        });
+        return { status: 200, msg: { "cadastro deletado": person } };
     } catch (err) {
-        return {
-            status: 500,
-            msg: "delet",
-            return: err
-        };
-    } finally {
-        closeDb();
+        return { status: 500, mdg: err };
     };
 };

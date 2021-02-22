@@ -3,7 +3,7 @@ import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-import { config } from '../config/config';
+import { config } from '../../config';
 
 export function validateBody(req: express.Request): void {
     if (Object.keys(req.body).length == 0) throw "Body não pode ser vazio!";

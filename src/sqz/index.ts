@@ -1,11 +1,11 @@
 import { Sequelize, SequelizeOptions } from 'sequelize-typescript';
-import { config } from './config'
+import { config } from '../../config'
 
 const sqlzOp: SequelizeOptions = {
     host: config.host,
     dialect: "mysql",
-    logging: console.log,
-    models: ['../models'],
+    logging: false,
+    models: [__dirname + "/models"],
     pool: {
         min: 0,
         max: 1,
